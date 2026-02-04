@@ -13,7 +13,9 @@
       "Bash(docker restart:*)",
       "Bash(docker ps:*)",
       "Bash(tree:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(pip install:*)",
+      "Bash(pre-commit run:*)"
     ]
   }
 }

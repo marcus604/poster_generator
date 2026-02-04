@@ -16,7 +16,16 @@ class Settings(BaseSettings):
     poster_height: int = 1500
 
     # Supported video extensions
-    video_extensions: List[str] = [".mp4", ".mkv", ".avi", ".mov", ".webm", ".m4v", ".wmv", ".flv"]
+    video_extensions: List[str] = [
+        ".mp4",
+        ".mkv",
+        ".avi",
+        ".mov",
+        ".webm",
+        ".m4v",
+        ".wmv",
+        ".flv",
+    ]
 
     @property
     def video_paths_list(self) -> List[Path]:

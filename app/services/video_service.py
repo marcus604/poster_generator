@@ -24,7 +24,7 @@ class VideoService:
             videos.extend(self._scan_directory(search_path, base_path))
 
         # Sort by name
-        videos.sort(key=lambda x: x['name'].lower())
+        videos.sort(key=lambda x: x["name"].lower())
         return videos
 
     def _scan_directory(self, dir_path: Path, base_path: Path) -> List[Dict[str, Any]]:
@@ -40,23 +40,28 @@ class VideoService:
                     # Check if directory contains any videos
                     has_videos = any(
                         f.suffix.lower() in self.video_extensions
-                        for f in item.rglob('*') if f.is_file()
+                        for f in item.rglob("*")
+                        if f.is_file()
                     )
                     if has_videos:
-                        items.append({
-                            'name': item.name,
-                            'path': str(item.relative_to(base_path)),
-                            'type': 'directory',
-                            'base': str(base_path)
-                        })
+                        items.append(
+                            {
+                                "name": item.name,
+                                "path": str(item.relative_to(base_path)),
+                                "type": "directory",
+                                "base": str(base_path),
+                            }
+                        )
                 elif item.is_file() and item.suffix.lower() in self.video_extensions:
-                    items.append({
-                        'name': item.name,
-                        'path': str(item.relative_to(base_path)),
-                        'type': 'video',
-                        'base': str(base_path),
-                        'size': item.stat().st_size
-                    })
+                    items.append(
+                        {
+                            "name": item.name,
+                            "path": str(item.relative_to(base_path)),
+                            "type": "video",
+                            "base": str(base_path),
+                            "size": item.stat().st_size,
+                        }
+                    )
         except PermissionError:
             pass
 
@@ -70,10 +75,10 @@ class VideoService:
 
         info = get_video_info(str(video_path))
         if info:
-            info['name'] = video_path.name
-            info['path'] = path
-            info['base'] = base
-            info['full_path'] = str(video_path)
+            info["name"] = video_path.name
+            info["path"] = path
+            info["base"] = base
+            info["full_path"] = str(video_path)
         return info
 
     def get_full_path(self, base: str, path: str) -> Optional[Path]:

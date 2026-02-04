@@ -15,7 +15,9 @@ class FrameService:
 
     def get_preview_frame(self, video_path: str, timestamp: float) -> Optional[bytes]:
         """Get a preview-quality frame (cached)."""
-        cache_key = self._cache_key(video_path, timestamp, self.preview_width, self.thumbnail_quality)
+        cache_key = self._cache_key(
+            video_path, timestamp, self.preview_width, self.thumbnail_quality
+        )
         cache_path = self.cache_dir / f"{cache_key}.jpg"
 
         # Return cached if exists
@@ -27,7 +29,7 @@ class FrameService:
             video_path,
             timestamp,
             width=self.preview_width,
-            quality=self.thumbnail_quality
+            quality=self.thumbnail_quality,
         )
 
         if frame_data:
@@ -42,7 +44,9 @@ class FrameService:
         """Get a full-quality frame (not cached due to size)."""
         return extract_frame_high_quality(video_path, timestamp)
 
-    def get_thumbnails(self, video_path: str, duration: float, count: int = 20) -> List[bytes]:
+    def get_thumbnails(
+        self, video_path: str, duration: float, count: int = 20
+    ) -> List[bytes]:
         """Generate evenly-spaced thumbnail frames for the slider."""
         thumbnails = []
         if duration <= 0 or count <= 0:
@@ -57,7 +61,9 @@ class FrameService:
 
         return thumbnails
 
-    def _cache_key(self, video_path: str, timestamp: float, width: int, quality: int) -> str:
+    def _cache_key(
+        self, video_path: str, timestamp: float, width: int, quality: int
+    ) -> str:
         """Generate cache key for a frame."""
         key_str = f"{video_path}:{timestamp:.3f}:{width}:{quality}"
         return hashlib.md5(key_str.encode()).hexdigest()
@@ -66,8 +72,7 @@ class FrameService:
         """Remove oldest cached frames if cache exceeds limit."""
         try:
             files = sorted(
-                self.cache_dir.glob("*.jpg"),
-                key=lambda p: p.stat().st_mtime
+                self.cache_dir.glob("*.jpg"), key=lambda p: p.stat().st_mtime
             )
             total_size = sum(f.stat().st_size for f in files)
 

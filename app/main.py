@@ -9,7 +9,7 @@ from app.config import settings
 app = FastAPI(
     title="Plex Poster Generator",
     description="Generate custom posters from video frames",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 # Include API routes

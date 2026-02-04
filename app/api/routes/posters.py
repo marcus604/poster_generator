@@ -13,7 +13,7 @@ router = APIRouter()
 class TextLayer(BaseModel):
     content: str
     left: float  # Bounding box left (normalized 0-1)
-    top: float   # Bounding box top (normalized 0-1)
+    top: float  # Bounding box top (normalized 0-1)
     fontFamily: str = "Arial"
     fontSize: int = 32
     fill: str = "#ffffff"
@@ -24,7 +24,7 @@ class TextLayer(BaseModel):
     angle: float = 0
     scaleX: float = 1
     scaleY: float = 1
-    width: Optional[float] = None   # Bounding box width (normalized 0-1)
+    width: Optional[float] = None  # Bounding box width (normalized 0-1)
     height: Optional[float] = None  # Bounding box height (normalized 0-1)
 
 
@@ -72,13 +72,13 @@ async def generate_poster(request: PosterGenerateRequest):
             canvas_height=request.canvasHeight,
             text_layers=[layer.model_dump() for layer in request.textLayers],
             line_elements=[elem.model_dump() for elem in request.lineElements],
-            filename=request.filename
+            filename=request.filename,
         )
 
         return {
             "success": True,
             "filename": output_filename,
-            "message": f"Poster saved as {output_filename}"
+            "message": f"Poster saved as {output_filename}",
         }
 
     except Exception as e:
