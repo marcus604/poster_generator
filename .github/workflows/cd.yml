@@ -9,7 +9,7 @@ on:
       - 'static/**'
       - 'Dockerfile'
       - 'requirements.txt'
-      - '.github/workflows/release.yml'
+      - '.github/workflows/cd.yml'
   workflow_dispatch:
 
 env:
@@ -35,6 +35,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
+          fallbackTag: v0.0.0
           patchList: fix, bugfix, perf, refactor, test, tests, chore, style, docs, ci
           minorList: feat, feature, minor
           majorList: major, breaking
