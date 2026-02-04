@@ -1,0 +1,26 @@
+services:
+  poster-generator:
+    build: .
+    container_name: poster-generator
+    ports:
+      - "${WEB_PORT:-8080}:8080"
+    volumes:
+      # Video source directories (read-only) - configure in .env
+      - ${VIDEO_PATH_1:-./videos}:/videos/source1:ro
+      # Output directory (read-write)
+      - ${OUTPUT_PATH:-./output}:/output:rw
+      # Optional: Custom fonts
+      - ${FONTS_PATH:-./fonts}:/app/static/fonts:ro
+    environment:
+      - VIDEO_PATHS=/videos/source1
+      - OUTPUT_PATH=/output
+      - CACHE_DIR=/tmp/poster_cache
+      - MAX_CACHE_SIZE_MB=${MAX_CACHE_SIZE_MB:-500}
+      - PREVIEW_MAX_WIDTH=${PREVIEW_MAX_WIDTH:-640}
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
