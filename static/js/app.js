@@ -203,7 +203,10 @@ class App {
             this.videoDuration.textContent = this._formatDuration(info.duration);
             this.videoInfo.style.display = 'block';
 
-            // Setup canvas
+            // Reset canvas before loading new video (clears old text/lines/background)
+            this.canvasManager.resetCanvas();
+
+            // Setup canvas for new video
             this.canvasManager.setVideo(video.base, video.path);
             this.frameSlider.setDuration(info.duration);
 

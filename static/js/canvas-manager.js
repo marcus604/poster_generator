@@ -106,6 +106,52 @@ class CanvasManager {
         this.videoPath = path;
     }
 
+    /**
+     * Reset canvas to clean state - clears all user elements and resets workflow
+     * Call this when selecting a new video or starting fresh
+     */
+    resetCanvas() {
+        // Remove all text and line objects
+        const objects = this.canvas.getObjects().filter(obj =>
+            obj.type === 'i-text' || obj.type === 'textbox' || obj.type === 'line'
+        );
+        objects.forEach(obj => this.canvas.remove(obj));
+
+        // Clear background image if exists
+        if (this.backgroundImage) {
+            this.canvas.remove(this.backgroundImage);
+            this.backgroundImage = null;
+        }
+
+        // Clear frame image
+        if (this.frameImage) {
+            this.canvas.remove(this.frameImage);
+            this.frameImage = null;
+        }
+
+        // Clear selection overlay and mask
+        if (this.selectionOverlay) {
+            this.canvas.remove(this.selectionOverlay);
+            this.selectionOverlay = null;
+        }
+        this.darkMaskRects.forEach(rect => this.canvas.remove(rect));
+        this.darkMaskRects = [];
+
+        // Reset state
+        this.lockedBackgroundData = null;
+        this.workflowPhase = 'background';
+        this.frameDisplayInfo = null;
+
+        // Reset canvas to image mode size
+        this._resizeCanvas(this.imageModeWidth, this.imageModeHeight);
+        this.canvas.setBackgroundColor('#1a1a2e', () => {
+            this.canvas.renderAll();
+        });
+
+        // Dispatch event to clear TextEditor state
+        window.dispatchEvent(new CustomEvent('selectionCleared'));
+    }
+
     async setFrame(timestamp) {
         if (!this.videoBase || !this.videoPath) return;
 

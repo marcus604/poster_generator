@@ -10,6 +10,7 @@ class FrameSlider {
         this.debounceDelay = 150; // ms to wait after slider stops moving
         this.pendingTimestamp = null;
         this.isLoading = false;
+        this.programmaticChange = false; // Flag to prevent input event on programmatic changes
 
         this._bindElements();
         this._bindEvents();
@@ -100,6 +101,9 @@ class FrameSlider {
     }
 
     _onSliderChange() {
+        // Skip if this is a programmatic change (from _stepFrame)
+        if (this.programmaticChange) return;
+
         const timestamp = parseFloat(this.slider.value);
         this._updateTimestampDisplay(timestamp);
 
@@ -137,7 +141,11 @@ class FrameSlider {
         let newValue = parseFloat(this.slider.value) + step;
         newValue = Math.max(0, Math.min(this.duration, newValue));
 
+        // Set flag to prevent _onSliderChange from triggering
+        this.programmaticChange = true;
         this.slider.value = newValue;
+        this.programmaticChange = false;
+
         this._updateTimestampDisplay(newValue);
 
         // For button/key steps, fetch immediately (no debounce)
