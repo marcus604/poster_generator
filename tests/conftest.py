@@ -1,9 +1,16 @@
 """Shared fixtures for all tests."""
 import io
+import os
 import pytest
 from PIL import Image
 from httpx import AsyncClient, ASGITransport
 from unittest.mock import patch, MagicMock
+
+# Set safe local paths before any app modules are imported.
+# In CI these are set via the workflow step env block instead.
+os.environ.setdefault("OUTPUT_PATH", "/tmp/placard_test_output")
+os.environ.setdefault("CACHE_DIR", "/tmp/placard_test_cache")
+os.environ.setdefault("VIDEO_PATHS", "/tmp/placard_test_videos")
 
 
 # ---------------------------------------------------------------------------
