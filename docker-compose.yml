@@ -5,8 +5,8 @@ services:
     ports:
       - "${WEB_PORT:-8080}:8080"
     volumes:
-      # Video source directories (read-only) - configure in .env
-      - ${VIDEO_PATH_1:-./videos}:/videos/source1:ro
+      # Video source directories (read-write to allow saving posters next to videos)
+      - ${VIDEO_PATH_1:-./videos}:/videos/source1:rw
       # Output directory (read-write)
       - ${OUTPUT_PATH:-./output}:/output:rw
       # Optional: Custom fonts

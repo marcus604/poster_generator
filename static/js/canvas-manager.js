@@ -783,10 +783,10 @@ class CanvasManager {
     }
 
     addText(text = 'New Text') {
-        // Add text centered in the poster area
+        // Add text in the bottom-left area, aligned with the line element
         const posterArea = this._getPosterArea();
-        const left = posterArea.left + posterArea.width / 2;
-        const top = posterArea.top + posterArea.height / 2;
+        const left = posterArea.left + 40;           // Slightly right of the default line (line is at 30px)
+        const top = posterArea.top + posterArea.height * 0.70;  // 70% down
 
         // Use Textbox for better multi-line support with text alignment
         const textObj = new fabric.Textbox(text, {
@@ -795,9 +795,9 @@ class CanvasManager {
             fontFamily: 'Arial',
             fontSize: 32,
             fill: '#ffffff',
-            textAlign: 'center',
-            originX: 'center',
-            originY: 'center',
+            textAlign: 'left',
+            originX: 'left',
+            originY: 'top',
             width: posterArea.width * 0.8,  // Default width for text wrapping
             splitByGrapheme: false
         });
