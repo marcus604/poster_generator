@@ -34,3 +34,5 @@ output/*.jpg
 # OS
 .DS_Store
 Thumbs.db
+
+videos
