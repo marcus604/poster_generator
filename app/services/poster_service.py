@@ -79,22 +79,34 @@ class PosterService:
             background.paste(poster, mask=poster.split()[3])
             poster = background
 
-        # Save poster
-        safe_filename = "".join(c for c in filename if c.isalnum() or c in ("_", "-"))
-        if not safe_filename:
-            safe_filename = "poster"
-
-        output_file = self.output_path / f"{safe_filename}.png"
+        # Determine output path based on video location
+        if video_base and video_path:
+            # Save next to the video file with same name
+            video_full_path = Path(video_base) / video_path
+            video_stem = video_full_path.stem  # filename without extension
+            output_dir = video_full_path.parent
+            output_file = output_dir / f"{video_stem}.png"
+        else:
+            # Fallback for color/gradient backgrounds (no video)
+            safe_filename = "".join(
+                c for c in filename if c.isalnum() or c in ("_", "-")
+            )
+            if not safe_filename:
+                safe_filename = "poster"
+            output_file = self.output_path / f"{safe_filename}.png"
 
         # Handle duplicate filenames
         counter = 1
+        base_stem = output_file.stem
+        base_dir = output_file.parent
         while output_file.exists():
-            output_file = self.output_path / f"{safe_filename}_{counter}.png"
+            output_file = base_dir / f"{base_stem}_{counter}.png"
             counter += 1
 
         poster.save(output_file, "PNG", quality=95)
+        logger.info(f"Poster saved to: {output_file}")
 
-        return str(output_file.name)
+        return str(output_file)
 
     def _apply_frame_background(
         self,

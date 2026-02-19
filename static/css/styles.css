@@ -440,11 +440,20 @@ input[type="color"] {
     color: var(--text-secondary);
 }
 
+/* Output Note */
+.output-note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+
 /* Generation Status */
 #generation-status {
     margin-top: 10px;
     font-size: 0.85rem;
     text-align: center;
+    word-break: break-all;
 }
 
 #generation-status.success {

@@ -55,7 +55,7 @@ class App {
         this.btnChangeBackground = document.getElementById('btn-change-background');
 
         // Generate
-        this.outputFilename = document.getElementById('output-filename');
+        this.outputNote = document.getElementById('output-note');
         this.btnGenerate = document.getElementById('btn-generate');
         this.generationStatus = document.getElementById('generation-status');
     }
@@ -219,9 +219,9 @@ class App {
             this.textPanel.style.display = 'none';
             this.generatePanel.style.display = 'none';
 
-            // Set default filename
+            // Update output note with expected filename
             const baseName = video.name.replace(/\.[^/.]+$/, '');
-            this.outputFilename.value = baseName + '_poster';
+            this.outputNote.textContent = `Poster will be saved as: ${baseName}.png`;
         } catch (error) {
             console.error('Failed to get video info:', error);
             alert('Failed to load video information');
@@ -249,19 +249,13 @@ class App {
             return;
         }
 
-        const filename = this.outputFilename.value.trim();
-        if (!filename) {
-            alert('Please enter a filename');
-            return;
-        }
-
         this.btnGenerate.disabled = true;
         this.generationStatus.textContent = 'Generating poster...';
         this.generationStatus.className = '';
 
         try {
             const posterData = this.canvasManager.exportPosterData();
-            posterData.filename = filename;
+            posterData.filename = 'poster';  // Fallback, actual name comes from video
 
             const result = await api.generatePoster(posterData);
 
