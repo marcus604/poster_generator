@@ -46,5 +46,9 @@ jobs:
           pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Run tests
+        env:
+          OUTPUT_PATH: /tmp/placard_test_output
+          CACHE_DIR: /tmp/placard_test_cache
+          VIDEO_PATHS: /tmp/placard_test_videos
         run: |
           python -m pytest tests/ -v --tb=short
