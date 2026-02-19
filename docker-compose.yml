@@ -1,7 +1,7 @@
 services:
-  poster-generator:
+  placard:
     build: .
-    container_name: poster-generator
+    container_name: placard
     ports:
       - "${WEB_PORT:-8080}:8080"
     volumes:

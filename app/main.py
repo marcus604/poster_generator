@@ -7,7 +7,7 @@ from app.api.routes import videos, frames, posters
 from app.config import settings
 
 app = FastAPI(
-    title="Plex Poster Generator",
+    title="Placard",
     description="Generate custom posters from video frames",
     version="1.0.0",
 )

@@ -1,6 +1,6 @@
-# Movie Poster Generator
+# Placard
 
-A web application for creating custom Movie posters from video frames with text overlays and decorative elements.
+A web application for creating custom movie posters from video frames with text overlays and decorative elements.
 
 ![Preview](https://img.shields.io/badge/Output-1000x1500px-blue) ![Docker](https://img.shields.io/badge/Docker-Ready-green)
 
@@ -91,7 +91,7 @@ Place `.ttf` or `.otf` files in the directory. Font variants should be named:
 ### Project Structure
 
 ```
-poster_generator/
+placard/
 ├── app/
 │   ├── api/routes/      # FastAPI endpoints
 │   ├── services/        # Business logic

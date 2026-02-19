@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Container version="2">
-  <Name>Movie Poster Generator</Name>
-  <Repository>ghcr.io/marcus604/poster_generator:latest</Repository>
+  <Name>Placard</Name>
+  <Repository>ghcr.io/marcus604/placard:latest</Repository>
   <Registry>https://ghcr.io</Registry>
   <Branch>
     <Tag>latest</Tag>
@@ -14,11 +14,11 @@
   <Network>bridge</Network>
   <Shell>bash</Shell>
   <Privileged>false</Privileged>
-  <Project>https://github.com/marcus604/poster_generator</Project>
-  <Overview>A web application for creating custom movie posters from video frames with text overlays and decorative elements. Extract frames from your media library, add text and lines, and generate 1000x1500px poster images.</Overview>
+  <Project>https://github.com/marcus604/placard</Project>
+  <Overview>Placard - A web application for creating custom movie posters from video frames with text overlays and decorative elements. Extract frames from your media library, add text and lines, and generate 1000x1500px poster images.</Overview>
   <Category>MediaApp:Video Tools:</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
-  <Icon>https://raw.githubusercontent.com/marcus604/poster_generator/main/static/icon.png</Icon>
+  <Icon>https://raw.githubusercontent.com/marcus604/placard/main/static/icon.png</Icon>
   <ExtraParams/>
   <DateInstalled></DateInstalled>
   <Description>A web application for creating custom movie posters from video frames with text overlays and decorative elements. Features include video frame selection, flexible backgrounds (image/color/gradient), frame cropping, background blur, multi-line text with alignment options, and decorative lines.</Description>
@@ -48,7 +48,7 @@
   <Config
     Name="Output Path"
     Target="/output"
-    Default="/mnt/user/appdata/poster_generator/output"
+    Default="/mnt/user/appdata/placard/output"
     Mode="rw"
     Description="Path where generated posters will be saved"
     Type="Path"

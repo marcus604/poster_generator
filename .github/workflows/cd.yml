@@ -1,4 +1,4 @@
-name: Build and Publish Container
+name: Build and Publish Placard
 
 on:
   push:

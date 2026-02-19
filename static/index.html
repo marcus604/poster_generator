@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plex Poster Generator</title>
+    <title>Placard</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
 </head>
@@ -11,7 +11,7 @@
     <div class="app-container">
         <!-- Sidebar: Video Browser & Controls -->
         <aside class="sidebar" id="sidebar">
-            <h1 class="app-title">Poster Generator</h1>
+            <h1 class="app-title">Placard</h1>
 
             <!-- Step 1: Video Selection -->
             <section class="panel" id="video-panel">
@@ -139,10 +139,7 @@
             <!-- Step 4: Generate -->
             <section class="panel" id="generate-panel" style="display: none;">
                 <h2 class="panel-title">4. Generate</h2>
-                <div class="form-row">
-                    <input type="text" id="output-filename" placeholder="poster_name">
-                    <span class="extension">.png</span>
-                </div>
+                <p class="output-note" id="output-note">Poster will be saved next to the video file.</p>
                 <button class="btn btn-primary btn-large" id="btn-generate">Generate Poster</button>
                 <div id="generation-status"></div>
             </section>
@@ -159,10 +156,10 @@
         </main>
     </div>
 
-    <script src="/static/js/api-client.js?v=8"></script>
-    <script src="/static/js/canvas-manager.js?v=8"></script>
-    <script src="/static/js/text-editor.js?v=8"></script>
-    <script src="/static/js/frame-slider.js?v=8"></script>
-    <script src="/static/js/app.js?v=8"></script>
+    <script src="/static/js/api-client.js?v=9"></script>
+    <script src="/static/js/canvas-manager.js?v=9"></script>
+    <script src="/static/js/text-editor.js?v=9"></script>
+    <script src="/static/js/frame-slider.js?v=9"></script>
+    <script src="/static/js/app.js?v=9"></script>
 </body>
 </html>
