@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 class Settings(BaseSettings):
-    video_paths: str = "/videos/source1,/videos/source2,/videos/source3"
+    video_paths: str = "/videos"
     output_path: Optional[str] = None
     cache_dir: str = "/tmp/poster_cache"
     max_cache_size_mb: int = 500

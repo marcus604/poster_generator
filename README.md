@@ -106,11 +106,13 @@ placard/
 ### Running Locally
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
+# Build the image
+docker build -t placard .
 
-# Run the server
-uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+# Run the container
+docker run -p 8080:8080 \
+  -v /path/to/your/videos:/videos \
+  placard
 ```
 
 ### Tech Stack
