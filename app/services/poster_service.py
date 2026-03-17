@@ -12,8 +12,7 @@ logger = logging.getLogger(__name__)
 
 class PosterService:
     def __init__(self):
-        self.output_path = Path(settings.output_path)
-        self.output_path.mkdir(parents=True, exist_ok=True)
+        self.output_path = Path(settings.output_path) if settings.output_path else None
 
         self.poster_width = settings.poster_width
         self.poster_height = settings.poster_height
@@ -93,7 +92,9 @@ class PosterService:
             )
             if not safe_filename:
                 safe_filename = "poster"
-            output_file = self.output_path / f"{safe_filename}.png"
+            out_dir = self.output_path or Path("./output")
+            out_dir.mkdir(parents=True, exist_ok=True)
+            output_file = out_dir / f"{safe_filename}.png"
 
         # Handle duplicate filenames
         counter = 1

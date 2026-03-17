@@ -1,11 +1,11 @@
 from pydantic_settings import BaseSettings
-from typing import List
+from typing import List, Optional
 from pathlib import Path
 
 
 class Settings(BaseSettings):
-    video_paths: str = "/videos/source1,/videos/source2,/videos/source3"
-    output_path: str = "/output"
+    video_paths: str = "/videos"
+    output_path: Optional[str] = None
     cache_dir: str = "/tmp/poster_cache"
     max_cache_size_mb: int = 500
     preview_max_width: int = 640
